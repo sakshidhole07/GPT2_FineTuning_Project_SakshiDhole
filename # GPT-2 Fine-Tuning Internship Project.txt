@@ -1,0 +1,79 @@
+# GPT-2 Fine-Tuning Internship Project
+**Author:** Sakshi Dhole
+**Project Type:** Internship / Training Project
+**Date:** January 2026
+
+## Objective
+Fine-tune a pre-trained GPT-2 model on a custom dataset to generate coherent and contextually relevant text.
+
+
+## Tools & Technologies
+- Python
+- Google Colab
+- Hugging Face Transformers
+- PyTorch
+- GPT-2 (distilgpt2)
+
+
+
+## Project Steps
+
+1. Install Required Libraries
+   - transformers, datasets, torch
+
+2. Import Libraries
+   - Import necessary modules for model, tokenizer, dataset, training, and text generation
+
+3. Load GPT-2 Model & Tokenizer
+   - Used `distilgpt2` pre-trained model
+   - Set padding token and resized embeddings
+
+4. Create Custom Dataset
+   - Created a dataset with 5 sample sentences
+   - Dataset includes AI and ML related sentences
+
+5. Tokenize Dataset
+   - Converted text into tokens
+   - Applied padding and truncation to a maximum length
+
+6. Prepare Data Collator
+   - Used `DataCollatorForLanguageModeling` with `mlm=False` (causal LM)
+
+7. Set Training Parameters
+   - Training epochs: 10
+   - Batch size: 2
+   - Output directory: `./gpt2-finetuned`
+   - Logging and saving steps defined
+
+8. Train GPT-2 Model
+   - Used Hugging Face `Trainer` API
+   - Fine-tuned model on custom dataset
+   - Monitored decreasing training loss
+
+9. Save Fine-Tuned Model
+   - Saved model and tokenizer locally
+   - Created a zip file `fine_tuned_gpt2.zip`
+
+10. Generate Text
+    - Used pipeline to generate text from fine-tuned model
+    - Use the fine-tuned model to generate text from a prompt
+    - Example: Input prompt "Artificial Intelligence is" → Output: "Artificial Intelligence is transforming the world."
+
+
+## Results
+- Fine-tuning completed successfully for 10 epochs
+- Model can generate coherent text similar to training dataset
+- Saved model and tokenizer ready for future use
+-  Example generated text:
+  "Artificial Intelligence is transforming the world."
+
+
+## How to Use the Model
+
+1. Extract `fine_tuned_gpt2.zip`
+2. Load model and tokenizer:
+   ```python
+   from transformers import pipeline
+   generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
+   output = generator("Your prompt here", max_length=50)
+   print(output[0]["generated_text"])
